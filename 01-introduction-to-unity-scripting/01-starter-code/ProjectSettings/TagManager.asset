@@ -6,6 +6,9 @@ TagManager:
   tags:
   - DestroyHay
   - DropSheep
+  - Hay
+  - Sheep
+  - HayBoundary
   layers:
   - Default
   - TransparentFX
