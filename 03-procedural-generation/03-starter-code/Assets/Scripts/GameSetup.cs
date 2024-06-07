@@ -26,9 +26,9 @@ public class GameSetup : MonoBehaviour
     {
         // -1 would place the monster inside the final cell, which is closed. 
         // -2 places it in the first guaranteed open cell (assuming your maze has odd-numbered rows + cols)
-        int xCoord = rows - 2;
-        int zCoord = cols - 2;
-        Vector3 startPos = new Vector3(xCoord * mazeMeshGenerator.width, 0, zCoord * mazeMeshGenerator.width);
-        GameObject newMonster = Instantiate(monsterPrefab, startPos, Quaternion.identity);
+        //int xCoord = rows - 2;
+        //int zCoord = cols - 2;
+        //Vector3 startPos = new Vector3(xCoord * mazeMeshGenerator.width, 0, zCoord * mazeMeshGenerator.width);
+        //GameObject newMonster = Instantiate(monsterPrefab, startPos, Quaternion.identity);
     }
 }

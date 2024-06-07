@@ -7,14 +7,16 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public UnityEvent OnGoldSet = new UnityEvent();
-    public int StartingGold = 1000;// Arbitrary starting value. 
+    public int StartingGold = 1000;
+    public int StartingHealth = 5;
     private int gold;
-
+    private int health;
     public bool gameOver = false;
+
     public UnityEvent OnHealthSet = new UnityEvent();
     public UnityEvent OnGameOver = new UnityEvent();
-    private int health;
+    public UnityEvent OnGoldSet = new UnityEvent();
+
     public int Health
     {
         get { return health; }
@@ -35,8 +37,6 @@ public class GameManager : MonoBehaviour
         set
         {
             gold = value;
-            // Anything in our game can hook into this event and run a function whenever the gold
-            // changes.
             OnGoldSet?.Invoke();
         }
     }
@@ -55,5 +55,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Gold = StartingGold;
+        Health = StartingHealth;
     }
 }
