@@ -12,6 +12,7 @@ public class Sheep : MonoBehaviour
     private Collider myCollider;
     private Rigidbody myRigidbody;
 
+
     // Added events
     public class SheepEvent : UnityEvent<Sheep> { }
     public SheepEvent OnAteHay = new SheepEvent();
@@ -38,7 +39,12 @@ public class Sheep : MonoBehaviour
 
         OnAteHay?.Invoke(this);
 
-        
+        // Previous method below
+        //GameObject SFXManagerObject = GameObject.Find("SFXManager"); // Finds the gameobject named SFXManager
+        //SFXManager sfxManager = SFXManagerObject.GetComponent<SFXManager>(); // turns the gameobject "SFXManager" into a sfxmanager and reads all the components inside
+        //sfxManager.SheepHitSFX.Play(); // plays the sound effect from the sfxmanager // line doesnt work
+
+        AudioSource.PlayClipAtPoint(SFXManager.Instance.SheepHitSFX, transform.position);
 
         SpawnHeart();
     }
@@ -49,6 +55,8 @@ public class Sheep : MonoBehaviour
         myRigidbody.isKinematic = false;
         myCollider.isTrigger = false;
         Destroy(gameObject, dropDestroyDelay);
+
+        AudioSource.PlayClipAtPoint(SFXManager.Instance.SheepDropSFX, transform.position);
 
         OnDropped?.Invoke(this);
     }

@@ -24,7 +24,7 @@ public class HayMachine : MonoBehaviour
     //        }
     //    }
 
-    // Above is my attempts, below is the update where there are boundaries
+    // Above is my attempts, below is the update where boundaries are implemented
 
     public float movementSpeed = 10f;
     public float horizontalBoundary = 22;
@@ -70,6 +70,7 @@ public class HayMachine : MonoBehaviour
     {
         Instantiate(hayBalePrefab, haySpawnpoint.position, Quaternion.identity);
 
+        AudioSource.PlayClipAtPoint(SFXManager.Instance.ShootSFX, transform.position);
     }
 
 }
