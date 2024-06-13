@@ -40,60 +40,60 @@ public class MazeConstructor : MonoBehaviour
                 // if the cell is 0 (is an open space), add "....", if the cell is 1 (is a wall), add "=="
                 msg += maze[i, j] == 0 ? "...." : "==";
             }
-            // add a new line at the end of each row to separate rows visually.
+            // adds a new line at the end of each row to separate rows visually
             msg += "\n";
         }
 
-        // display the maze string on the screen as a label.
+        // displays the maze string on the screen as a label
         GUI.Label(new Rect(20, 20, 500, 500), msg);
     }
 
-    // this function generates the maze data based on the specified number of rows and columns.
+    // this will generates the maze data based on the specified number of rows and columns
     public int[,] GenerateMazeDataFromDimensions(int numRows, int numCols)
     {
-        // create a 2D array to represent the maze with the given number of rows and columns.
+        // create a 2D array to represent the maze with the given number of rows and columns
         int[,] maze = new int[numRows, numCols];
-        // define the probability threshold for placing walls (10% chance to place a wall).
+        // define the probability threshold for placing walls (10% chance to place a wall)
         float placementThreshold = 0.1f;
 
-        // loop through each row in the maze.
+        // loop through each row in the maze
         for (var x = 0; x < numRows; x++)
         {
-            // loop through each column in the maze.
+            // loop through each column in the maze
             for (var y = 0; y < numCols; y++)
             {
-                // if the current cell is on the edge of the maze (first or last row/column)...
+                // if the current cell is on the edge of the maze (first or last row/column)... v
                 if (x == 0 || y == 0 || x == numRows - 1 || y == numCols - 1)
                 {
-                    // ...make it a wall (set the cell value to 1).
+                    // make it a wall (set the cell value to 1)
                     maze[x, y] = 1;
                 }
-                // if the current cell is at an even row and column (excluding edges)...
+                // if the current cell is at an even row and column (excluding edges)... v
                 else if (x % 2 == 0 && y % 2 == 0)
                 {
-                    // ...and if a random value is greater than the placement threshold...
+                    // and if a random value is greater than the placement threshold... v
                     if (Random.value > placementThreshold)
                     {
-                        // ...make this cell a wall (set the cell value to 1).
+                        // make this cell a wall (set the cell value to 1)
                         maze[x, y] = 1;
 
-                        // randomly choose to offset by -1 or 1 (to place an adjacent wall).
+                        // randomly choose to offset by -1 or 1 (to place an adjacent wall)
                         int delta = Random.value > 0.5f ? -1 : 1;
-                        // create an array to store the offset values.
+                        // create an array to store the offset values
                         int[] offset = new int[2];
-                        // randomly decide whether to apply the offset to the x or y coordinate.
+                        // randomly decide whether to apply the offset to the x or y coordinate
                         int offsetIndex = Random.value > 0.5f ? 0 : 1;
-                        // apply the delta value to the chosen coordinate in the offset array.
+                        // apply the delta value to the chosen coordinate in the offset array
                         offset[offsetIndex] = delta;
 
-                        // make the adjacent cell a wall by applying the offset.
+                        // make the adjacent cell a wall by applying the offset
                         maze[x + offset[0], y + offset[1]] = 1;
                     }
                 }
             }
         }
 
-        // return the generated maze data.
+        // return the generated maze data
         return maze;
     }
 }
