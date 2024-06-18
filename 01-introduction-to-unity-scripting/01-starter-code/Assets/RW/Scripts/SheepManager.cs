@@ -29,18 +29,31 @@ public class SheepManager : MonoBehaviour
 //        }
 //        
 //    }
-// Above is the old version before adding lists and events
+// Above is the old version before adding lists and events and so forth
+
+    public static SheepManager Instance;
 
     public Sheep sheepPrefab;
     public Transform[] sheepSpawnPoints;
     public float spawnInterval = 2f;
 
+    private Coroutine spawnRoutine;
+
     private List<Sheep> sheepList = new List<Sheep>();
 
-    //private voids make it so that other classes or scripts can call upon this 
+
+    // singleton set up so I can reference from other class
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
-        StartCoroutine(SpawnRoutine());
+        StartSpawningSheep();
+
+        // used to be just this
+        //StartCoroutine(SpawnRoutine());
     }
 
     private void SpawnSheep()
@@ -64,6 +77,24 @@ public class SheepManager : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
         
+    }
+
+    public void StartSpawningSheep()
+    {
+        if (spawnRoutine == null)
+        {
+            spawnRoutine = StartCoroutine(SpawnRoutine());
+        }
+    }
+
+    // method to stop the spawning coroutine
+    public void StopSpawningSheep()
+    {
+        if (spawnRoutine != null)
+        {
+            StopCoroutine(spawnRoutine);
+            spawnRoutine = null;
+        }
     }
 
     private void HandleSheepAteHay(Sheep sheep)

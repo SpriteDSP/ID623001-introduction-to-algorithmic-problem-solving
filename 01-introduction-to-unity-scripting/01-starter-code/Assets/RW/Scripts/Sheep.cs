@@ -45,8 +45,10 @@ public class Sheep : MonoBehaviour
         //sfxManager.SheepHitSFX.Play(); // plays the sound effect from the sfxmanager // line doesnt work
 
         AudioSource.PlayClipAtPoint(SFXManager.Instance.SheepHitSFX, transform.position);
-
         SpawnHeart();
+
+        //with instances again, im calling a function from the gamemanager class
+        GameManager.Instance.SaveSheep();
     }
 
     private void Drop()
@@ -59,6 +61,9 @@ public class Sheep : MonoBehaviour
         AudioSource.PlayClipAtPoint(SFXManager.Instance.SheepDropSFX, transform.position);
 
         OnDropped?.Invoke(this);
+
+        //instance that gives info for the heart icons in the gamemanager
+        GameManager.Instance.LoseLife();
     }
 
     private void OnTriggerEnter(Collider other)
