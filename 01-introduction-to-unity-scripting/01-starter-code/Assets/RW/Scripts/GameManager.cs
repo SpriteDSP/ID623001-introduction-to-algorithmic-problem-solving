@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,16 +14,16 @@ public class GameManager : MonoBehaviour
     public int sheepSaved;
     public TMP_Text scoreText;
 
-    // tracks how many sheep have been dropped
-    [HideInInspector]
-    public int sheepDropped;
-
-    // specifies how many sheep can be dropped before we lose the game
-    public int sheepDroppedBeforeGameOver;
-
     // array to hold references to heart images
     public Image[] heartImages;
     public int lives = 3;
+
+    public GameObject gameOverScreen;
+
+    //starter code below is no longer needed as ive done the same thing but slightly different
+    //[HideInInspector]
+    //public int sheepDropped;
+    //public int sheepDroppedBeforeGameOver;
 
     public void Awake()
     {
@@ -49,11 +48,11 @@ public class GameManager : MonoBehaviour
             Destroy(sheep.gameObject);
         }
 
-        // Stop the sheep manager from spawning more sheep
+        // stops the sheep manager from spawning more sheep
         SheepManager.Instance.StopSpawningSheep();
 
-        // Optionally, load the Game Over scene or show a game over UI
-        // SceneManager.LoadScene("GameOverScene");
+        // displays the gameover screen
+        gameOverScreen.SetActive(true);
     }
 
     public void LoseLife()
@@ -85,9 +84,6 @@ public class GameManager : MonoBehaviour
     private void UpdateScoreText()
     {
         // Update the score text to show the current number of sheep saved.
-        if (scoreText != null)
-        {
-            scoreText.text = "Sheep Saved: " + sheepSaved.ToString();
-        }
+        scoreText.text = "Sheep Saved: " + sheepSaved.ToString();
     }
 }

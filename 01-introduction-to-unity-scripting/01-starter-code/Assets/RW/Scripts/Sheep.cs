@@ -18,7 +18,7 @@ public class Sheep : MonoBehaviour
     public SheepEvent OnAteHay = new SheepEvent();
     public SheepEvent OnDropped = new SheepEvent();
 
-    // Heart prefab and customizable float for how long the heart lingers
+    // feedback heart prefab and customizable float for how long the heart lingers
     public GameObject heartPrefab;
     public float heartDestroyDelay;
 

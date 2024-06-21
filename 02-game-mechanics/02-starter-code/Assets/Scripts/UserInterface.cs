@@ -11,14 +11,21 @@ public class UserInterface : MonoBehaviour
     [SerializeField] private Animator topHalfWaveStartLabel;
     [SerializeField] private Animator bottomHalfWaveStartLabel;
     [SerializeField] private Animator gameOverLabel;
+    [SerializeField] private Animator gameWonLabel;
 
-    public string tagFilter;
+    //this was to get the cookie tag however it didnt work as i thought it would
+    //public string tagFilter;
+
+    //couldnt get cookie collision to work
+    //[SerializeField] private GameObject cookie;
 
     private void Awake()
     {
         GameManager.Instance.OnGoldSet.AddListener(HandleGoldSet);
         GameManager.Instance.OnHealthSet.AddListener(HandleHealthSet);
         EnemySpawner.OnWaveStarted.AddListener(HandleWaveStarted);
+        GameManager.Instance.OnGameOver.AddListener(HandleGameOver);
+        GameManager.Instance.OnGameWon.AddListener(HandleGameWon);
     }
 
     private void HandleHealthSet()
@@ -38,12 +45,29 @@ public class UserInterface : MonoBehaviour
         bottomHalfWaveStartLabel.SetTrigger("nextWave");
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void HandleGameOver()
     {
-        // If enemy collides with cookie
-        if (other.CompareTag("Enemy"))
-        {
-            GameManager.Instance.Health -= 1;
-        }
+        gameOverLabel.SetTrigger("gameOver");
     }
+
+    private void HandleGameWon()
+    {
+        gameWonLabel.SetTrigger("gameWon");
+    }
+
+    // wasn't able to get the health to decrease when the enemy collided with the cookie
+    // will switch to when the enemy reaches its last waypoint instead
+    //
+    //private void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    // If enemy collides with cookie
+    //    if (other.CompareTag("Enemy"))
+    //    {
+    //        // Check if the collided object is the cookie
+    //        if (other.gameObject == cookie)
+    //        {
+    //            GameManager.Instance.Health -= 1;
+    //        }
+    //    }
+    //}
 }

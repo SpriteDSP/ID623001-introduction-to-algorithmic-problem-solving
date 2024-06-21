@@ -7,6 +7,9 @@ public class MonsterLevel
 {
     public int cost;// How much it costs to go to this level (we will implement this later)
     public GameObject visualization; // A GameObject that is a child of the monster. There are 3 on the provided prefab.
+
+    public GameObject bulletPrefab;
+    public float shootCooldown; // Shoot cooldown for this level
 }
 
 public class MonsterData : MonoBehaviour
@@ -33,6 +36,12 @@ public class MonsterData : MonoBehaviour
 
             // Finds the visualization associated with the current level.
             GameObject levelVisualization = levels[currentLevelIndex].visualization;
+
+            GameObject bulletPrefab = levels[currentLevelIndex].bulletPrefab;
+            if (bulletPrefab != null)
+            {
+                GetComponent<EnemyShooter>().bulletPrefab = bulletPrefab;
+            }
 
             // Iterates over each level.
             for (int i = 0; i < levels.Count; i++)
@@ -83,5 +92,10 @@ public class MonsterData : MonoBehaviour
         {
             CurrentLevel = levels[currentLevelIndex + 1];
         }
+    }
+
+    public float GetShootCooldown()
+    {
+        return currentLevel.shootCooldown;
     }
 }

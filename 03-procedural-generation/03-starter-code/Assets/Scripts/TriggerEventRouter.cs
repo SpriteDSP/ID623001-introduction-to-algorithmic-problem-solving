@@ -1,24 +1,29 @@
-﻿/*
- * written by Joseph Hocking 2017
- * released under MIT license
- * text of license https://opensource.org/licenses/MIT
- */
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public delegate void TriggerEventHandler(GameObject trigger, GameObject other);
+using UnityEngine.Events;
 
 public class TriggerEventRouter : MonoBehaviour
 {
-    public TriggerEventHandler callback;
+    //public UnityEvent OnPlayerEntered = new UnityEvent();
+    //public UnityEvent OnPlayerExited = new UnityEvent();
 
     void OnTriggerEnter(Collider other)
     {
-        if (callback != null)
+        if (other.CompareTag("Monster"))
         {
-            callback(this.gameObject, other.gameObject);
+            GameSetup.Instance.GameLose();
+        }
+        else if (other.CompareTag("Treasure"))
+        {
+            GameSetup.Instance.GameWon();
         }
     }
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //    }
+    //}
 }

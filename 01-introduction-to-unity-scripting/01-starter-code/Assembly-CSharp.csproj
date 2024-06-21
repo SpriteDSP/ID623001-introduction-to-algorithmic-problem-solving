@@ -72,6 +72,7 @@
     <Compile Include="Assets\DOTween_1_2_765\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\DOTween_1_2_765\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\DOTween_1_2_765\DOTween\Modules\DOTweenModuleUtils.cs" />
+    <Compile Include="Assets\RW\Scripts\ButtonManager.cs" />
     <Compile Include="Assets\RW\Scripts\GameManager.cs" />
     <Compile Include="Assets\RW\Scripts\HayBale.cs" />
     <Compile Include="Assets\RW\Scripts\HayBoundary.cs" />

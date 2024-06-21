@@ -7,6 +7,14 @@ public class MonsterSlot : MonoBehaviour
     public MonsterData MonsterPrefab;
     private MonsterData placedMonster = null;
 
+    //reference to audio source
+    private AudioSource towerPlaceSFX;
+
+    void Start()
+    {
+        //gets the audiosource component attached to gameobject
+        towerPlaceSFX = GetComponent<AudioSource>();
+    }
     void OnMouseUp()
     {
         if (placedMonster == null)
@@ -14,6 +22,9 @@ public class MonsterSlot : MonoBehaviour
             if (CanPlaceMonster())
             {
                 PlaceMonster();
+
+                towerPlaceSFX.Play();
+
             }
 
         }
@@ -51,5 +62,7 @@ public class MonsterSlot : MonoBehaviour
     {
         placedMonster = Instantiate(MonsterPrefab, transform.position, Quaternion.identity);
         GameManager.Instance.Gold -= MonsterPrefab.levels[0].cost;
+
+
     }
 }
